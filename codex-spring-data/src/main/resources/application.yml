@@ -1,5 +1,7 @@
 # Autocreate DB on startup
 spring.jpa.hibernate.ddl-auto: create-drop
+spring.jpa.show_sql: false
+
 
 # Spring data config
 

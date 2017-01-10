@@ -16,20 +16,25 @@ import javax.persistence.*;
 public class Record
 {
     @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE)
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    @SequenceGenerator(name = "record-id-gen", sequenceName = "record-id-gen-sec")
     private Long id;
+    @Column(name = "name", length = 64, nullable = false)
     private String name;
+    @Column(name = "updates", length = 10, nullable = false)
     private Integer updates;
 
     @PrePersist
     protected void beforeCreate ()
     {
+        System.out.println("YYY");
         updates = 0;
     }
 
     @PreUpdate
     protected void beforeUpdate ()
     {
+        System.out.println("XXX");
         updates++;
     }
 

@@ -1,5 +1,6 @@
-package com.github.apycazo.codex.spring.data.basic;
+package com.github.apycazo.codex.spring.data;
 
+import com.github.apycazo.codex.spring.data.basic.Record;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
