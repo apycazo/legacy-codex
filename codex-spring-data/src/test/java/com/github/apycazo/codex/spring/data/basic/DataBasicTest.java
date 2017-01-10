@@ -13,7 +13,16 @@ import java.util.List;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
 
-@DataJpaTest
+/**
+ * Note that, by default, @DataJpaTest does the following:
+ * <ul>
+ *     <li>Configure an in-memory database.</li>
+ *     <li>CAuto-configure Hibernate, Spring Data and the DataSource.</li>
+ *     <li>Perform an @EntityScan</li>
+ *     <li>Turn on SQL logging</li>
+ * </ul>
+ */
+@DataJpaTest(showSql = false)
 @RunWith(SpringRunner.class)
 public class DataBasicTest
 {
