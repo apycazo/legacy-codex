@@ -27,14 +27,12 @@ public class Record
     @PrePersist
     protected void beforeCreate ()
     {
-        System.out.println("YYY");
         updates = 0;
     }
 
     @PreUpdate
     protected void beforeUpdate ()
     {
-        System.out.println("XXX");
         updates++;
     }
 
