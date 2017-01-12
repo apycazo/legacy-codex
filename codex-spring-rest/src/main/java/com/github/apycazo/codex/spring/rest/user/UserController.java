@@ -1,6 +1,7 @@
-package com.github.apycazo.codex.spring.rest.services;
+package com.github.apycazo.codex.spring.rest.user;
 
 import com.fasterxml.jackson.annotation.JsonView;
+import lombok.Getter;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -20,12 +21,11 @@ import java.util.stream.Collectors;
 
 @Slf4j
 @RestController
-@RequestMapping(value = UserController.servicePath, produces = MediaType.APPLICATION_JSON_VALUE)
+@RequestMapping(value = "${codex.spring.rest.user.path:user}", produces = MediaType.APPLICATION_JSON_VALUE)
 public class UserController
 {
-    // Just to ease up rest assured tests
-    public static final String servicePath = "/user";
     // The record storage
+    @Getter // for testing
     private Map<Integer, UserInfo> userDirectory = new LinkedHashMap<>();
     // An id generator, in case the id provided on PUT | POST equals '0'
     private AtomicInteger idGenerator = new AtomicInteger(1);
