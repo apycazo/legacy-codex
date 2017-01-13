@@ -1,0 +1,12 @@
+config:
+    string: value on config
+    list:
+        - first value
+        - second value
+    map:
+        -
+            someKey: someValue
+            anotherKey: anotherValue
+    inner:
+        number: 10
+        valid: true

@@ -12,6 +12,8 @@
         <groupId>org.springframework.boot</groupId>
         <artifactId>spring-boot-starter-parent</artifactId>
         <version>1.4.3.RELEASE</version>
+        <!-- Setting this to empty eliminates a problem with the aggregator -->
+        <relativePath/>
     </parent>
 
     <properties>
