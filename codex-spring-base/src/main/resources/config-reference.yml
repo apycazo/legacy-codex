@@ -4,9 +4,10 @@ config:
         - first value
         - second value
     map:
-        -
-            someKey: someValue
-            anotherKey: anotherValue
+        firstKey: value1
+        secondKey:
+            innerKey1: innerValue1
+            innerKey2: innerValue2
     inner:
         number: 10
         valid: true

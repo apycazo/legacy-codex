@@ -26,8 +26,8 @@ public class SampleConfigBean
     @Data // getter & setter methods are required
     public static class InnerElement
     {
-        private Integer number;
-        private Boolean valid;
+        private Integer number = 0;
+        private Boolean valid = false;
     }
 
     private InnerElement inner = new InnerElement();
