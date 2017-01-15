@@ -2,8 +2,15 @@ package com.github.apycazo.codex.spring.base.j8;
 
 import lombok.Builder;
 
+import java.util.function.Supplier;
+
 public class J8Sampler
 {
+    // Needs to be static to be able to use with '::' operator.
+    public static Integer inc (Integer value)
+    {
+        return value+1;
+    }
 
     interface CountCharacters
     {
@@ -16,6 +23,11 @@ public class J8Sampler
         public Integer processValue(String text)
         {
             return text.length();
+        }
+
+        public String getValueAsString (Supplier<Integer> supplyValue)
+        {
+            return "value:" + supplyValue.get();
         }
     }
 

@@ -10,6 +10,7 @@ import java.util.*;
 import java.util.function.Consumer;
 import java.util.function.Function;
 import java.util.function.Predicate;
+import java.util.function.Supplier;
 import java.util.stream.Collectors;
 
 import static org.junit.Assert.*;
@@ -19,7 +20,7 @@ import static org.junit.Assert.*;
 public class J8SamplerTest
 {
     @Test
-    public void testOptionalUsage ()
+    public void optionalUsage ()
     {
         String str = "string";
         String emptyStr = "";
@@ -37,7 +38,7 @@ public class J8SamplerTest
     }
 
     @Test
-    public void testPredicate()
+    public void predicateUsage()
     {
         Predicate<Integer> isEven = (x) -> x % 2 == 0;
 
@@ -46,7 +47,7 @@ public class J8SamplerTest
     }
 
     @Test
-    public void testFunction()
+    public void functionUsage()
     {
         Function<String, Integer> sizeOf = (x) -> x == null ? 0 : x.trim().length();
 
@@ -54,7 +55,7 @@ public class J8SamplerTest
     }
 
     @Test
-    public void testConsumer()
+    public void consumerUsage()
     {
 
         List<String> numberList = new LinkedList<>(Arrays.asList("1,2,3,4".split(",")));
@@ -66,13 +67,23 @@ public class J8SamplerTest
     }
 
     @Test
-    public void doubleColonTest ()
+    public void supplierUsage ()
+    {
+        Supplier<Integer> get5 = () -> 5;
+        assertEquals(5, get5.get().intValue());
+    }
+
+    @Test
+    public void doubleColonUsage ()
     {
         J8Sampler.Counter counter = new J8Sampler.Counter();
         // Counter implements interface 'CountCharacters' which we want to use
         J8Sampler.CountCharacters c = counter::processValue;
 
         assertEquals(5, c.processValue("12345").intValue());
+
+        Function<Integer, Integer> addOne = J8Sampler::inc;
+        assertEquals(5, addOne.apply(4).intValue());
     }
 
     @Test
