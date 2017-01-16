@@ -7,11 +7,14 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
 
 import java.util.*;
+import java.util.concurrent.ThreadLocalRandom;
+import java.util.concurrent.atomic.AtomicInteger;
 import java.util.function.Consumer;
 import java.util.function.Function;
 import java.util.function.Predicate;
 import java.util.function.Supplier;
 import java.util.stream.Collectors;
+import java.util.stream.IntStream;
 
 import static org.junit.Assert.*;
 
@@ -178,5 +181,54 @@ public class J8SamplerTest
         assertEquals(2, groups.get(2).size());
         assertEquals(2, groups.get(2).get(0).getValue().intValue());
         assertEquals(2, groups.get(2).get(1).getValue().intValue());
+    }
+
+    @Test
+    public void intStreams ()
+    {
+        // [Note] boxed(): Returns a Stream consisting of the elements of this stream, each boxed to an Integer
+        // Basically converts IntStream into a Stream<Integer> we can collect values from
+        List<Integer> list = IntStream.rangeClosed(0, 9).boxed().collect(Collectors.toList());
+        assertEquals(10, list.size());
+
+        // Another way
+        list = IntStream.of(0,1,2,3,4,5,6,7,8,9).boxed().collect(Collectors.toList());
+        assertEquals(10, list.size());
+
+        // generates [1,2] this is, range [0,3)
+        list = IntStream.range(1, 3).boxed().collect(Collectors.toList());
+        assertTrue(list.contains(1));
+        assertTrue(list.contains(2));
+        assertFalse(list.contains(3));
+
+        // generates [1,2,3] this is, range [0,3]
+        list = IntStream.rangeClosed(1, 3).boxed().collect(Collectors.toList());
+        assertTrue(list.contains(1));
+        assertTrue(list.contains(2));
+        assertTrue(list.contains(3));
+
+        // Random value list generator
+        list = IntStream.generate(() -> ThreadLocalRandom.current().nextInt(10)).limit(3).boxed().collect(Collectors.toList());
+        assertEquals(3, list.size());
+
+        // Calculate squares with map
+        list = IntStream.rangeClosed(1,3).map(x -> x*x).boxed().collect(Collectors.toList());
+        assertEquals(3, list.size());
+        assertEquals(1, list.get(0).intValue());
+        assertEquals(4, list.get(1).intValue());
+        assertEquals(9, list.get(2).intValue());
+
+        // Reduce (base, (p1, p2) -> product)
+        // 1,2 -> 2
+        // 2,3 -> 6
+        // 6,4 -> 24
+        int value = IntStream.range(1, 5).reduce(1, (x, y) -> x * y);
+        assertEquals(24, value);
+
+        // loop 0-5 without an actual loop
+        AtomicInteger sum = new AtomicInteger(0);
+        IntStream.rangeClosed(1,3).forEach(sum::addAndGet);
+        assertEquals(6, sum.get());
+
     }
 }
