@@ -9,6 +9,7 @@ var gulp     = require('gulp'),
 
 gulp.task('build', function () {
 
+    // ES6 conversion
     var sources = browserify({
 		entries: 'js/ecma6.js',
 		debug: true // Build source maps
@@ -17,7 +18,8 @@ gulp.task('build', function () {
 		presets: ["es2015"]
 	}));
 
-    return sources.bundle()
+    // Minification
+    sources.bundle()
 		.pipe(source('app.min.js'))
 		.pipe(buffer())
 		.pipe(sourcemaps.init({
@@ -29,4 +31,7 @@ gulp.task('build', function () {
 			includeContent: true
 		}))
 		.pipe(gulp.dest('dist'));
+
+    // copy html into dist (example)
+    // gulp.src('./html/ecma6.html').pipe(gulp.dest('./dist'));
 });
