@@ -4,7 +4,8 @@ TBD
 
 ## Note: Gulp example to be fixed:
 
-gulp.task('scripts', function() { 
+```javascript
+gulp.task('scripts', function() {
 return gulp.src('app/js/**/*.js')
 	.pipe(jshint('.jshintrc'))
 	.pipe(jshint.reporter('default'))
@@ -17,3 +18,4 @@ return gulp.src('app/js/**/*.js')
 	.pipe(livereload(server))
 	.pipe(notify({ message: 'Scripts task complete' }));
 	});
+```

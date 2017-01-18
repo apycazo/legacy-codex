@@ -2,24 +2,31 @@ var gulp     = require('gulp'),
   concat     = require('gulp-concat'),
   uglify     = require('gulp-uglify'),
   browserify = require("browserify")
-  rename     = require("gulp-rename"),
-  // source     = require('vinyl-source-stream'),
-  fs         = require("fs"),
-  babelify   = require('babelify');
+  source     = require('vinyl-source-stream'),
+  buffer     = require('vinyl-buffer');
+  babelify   = require('babelify')
+  sourcemaps = require('gulp-sourcemaps');
 
-gulp.task('dist', function () {
+gulp.task('build', function () {
 
-    gulp.src('js/ecma2015.js')
-        // .pipe(concat('ecma6-all.js'))
-        .pipe(rename('app.min.js'))
-        .pipe(uglify())
-        .pipe(gulp.dest('dist'))
-});
+    var sources = browserify({
+		entries: 'js/ecma6.js',
+		debug: true // Build source maps
+	})
+	.transform(babelify.configure({
+		presets: ["es2015"]
+	}));
 
-gulp.task('es2015', function () {
-
-    browserify({entries: 'js/ecma6.js', debug:true})
-    .transform("babelify", { presets: ["es2015"] })
-    .bundle()
-    .pipe(fs.createWriteStream("js/ecma2015.js"));
+    return sources.bundle()
+		.pipe(source('app.min.js'))
+		.pipe(buffer())
+		.pipe(sourcemaps.init({
+			loadMaps: true // Load the sourcemaps from
+		}))
+		// .pipe(plugins.ngAnnotate())
+		.pipe(uglify())
+		.pipe(sourcemaps.write('./', {
+			includeContent: true
+		}))
+		.pipe(gulp.dest('dist'));
 });
