@@ -1,7 +1,11 @@
-// Core module
+// -----------------------------------------------------------------------------
+// Angular module init
+// -----------------------------------------------------------------------------
 var core = angular.module('test',[]);
 
+// -----------------------------------------------------------------------------
 // Service
+// -----------------------------------------------------------------------------
 function CommonSrvc () {
 
   // Creates the service instance
@@ -15,52 +19,93 @@ function CommonSrvc () {
 
 core.factory('CommonSrvc', CommonSrvc);
 
+// -----------------------------------------------------------------------------
 // Controller
-function CoreCtrl ($scope, commonSrvc) {
+// -----------------------------------------------------------------------------
+function CoreCtrl ($scope, $window, commonSrvc) {
 
-  function processValue (x, y = 10, ...extras) {
-    var total = x+y;
-    extras.forEach(v => total += v);
-    return total;
-  }
+    angular.extend($scope, {
+        alert: function (text) {
+            commonSrvc.showAlert(text);
+        },
+        goToGithub: function () {
+            $window.open('https://github.com/apycazo/codex/tree/master/codex-angularjs-base/ecma6', '_blank');
+        }
+    });
 
-  $scope.text = `Angular library loaded and working (value = ${processValue(5,1,2,3)})`;
+    // --- Parameter defaults ---
 
-  var values = [..."123"];
-  values.forEach(v => console.log('value: ' + v));
-  var multilineString = `
-    some
-    multiline
-    string:
-    ${values[0]}: ${processValue(5)}
-  `;
-  console.log(multilineString);
-
-  // class sample
-
-  class Tester {
-    init(y = 5) {
-      this.x = 10;
-      this.y = y;
+    var inc = function (value, delta = 1) {
+        return value + delta;
     }
-    log(text = '') {
-      console.log(`text: '${text}', x = ${this.x}, y = ${this.y}`);
+
+    angular.extend($scope, {
+        parameterDefaults: {
+            src: inc.toString(),
+            val: inc(9)
+        }
+    });
+
+    // --- Unknown parameters ---
+
+    var sum = function (...values) {
+        result = 0;
+        values.forEach(value => result += value);
+        console.log(`Final value = ${result}`);
+        return result;
     }
-  }
 
-  var tester1 = new Tester();
-  tester1.init(2);
+    angular.extend($scope, {
+        parametersUnknown: {
+            src: sum.toString(),
+            val1: sum(1,2,3),
+            val2: sum()
+        }
+    });
 
-  var tester2 = new Tester();
-  tester2.init(5);
+    // --- Class init ---
 
-  tester1.log('instance 1');
-  tester2.log('instance 2');
+    class Foo {
+        init(v = 1) {
+            this.value = v;
+            return this;
+        }
+        get() {
+            return this.value;
+        }
+    }
 
-  $scope.alert = function (text) {
-    commonSrvc.showAlert(text);
-  }
+    var foo1 = new Foo();
+    var foo2 = new Foo(2);
+
+    angular.extend($scope, {
+        classInit: {
+            src: Foo.toString(),
+            val1: new Foo().init().get(),
+            val2: new Foo().init(2).get(),
+        }
+    });
+
+    // --- Array init
+    angular.extend($scope, {
+        arrayInit: {
+            src: 'var values = [..."123"]',
+            val: [..."123"]
+        }
+    });
+
+    var values = [..."123"];
+    values.forEach(v => console.log('value: ' + v));
+    var multilineString = `
+        some
+        multiline
+        string:
+        ${values[0]}: ${sum(5)}
+    `;
+
+    console.log(multilineString);
+
 
 }
 
-core.controller('CoreCtrl', ['$scope', 'CommonSrvc', CoreCtrl]);
+core.controller('CoreCtrl', ['$scope', '$window', 'CommonSrvc', CoreCtrl]);

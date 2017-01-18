@@ -5,9 +5,10 @@ var gulp     = require('gulp'),
   source     = require('vinyl-source-stream'),
   buffer     = require('vinyl-buffer');
   babelify   = require('babelify')
-  sourcemaps = require('gulp-sourcemaps');
+  sourcemaps = require('gulp-sourcemaps'),
+  less       = require('gulp-less');;
 
-gulp.task('build', function () {
+gulp.task('babelify-and-uglify', function () {
 
     // ES6 conversion
     var sources = browserify({
@@ -19,7 +20,7 @@ gulp.task('build', function () {
 	}));
 
     // Minification
-    sources.bundle()
+    return sources.bundle()
 		.pipe(source('app.min.js'))
 		.pipe(buffer())
 		.pipe(sourcemaps.init({
@@ -35,3 +36,14 @@ gulp.task('build', function () {
     // copy html into dist (example)
     // gulp.src('./html/ecma6.html').pipe(gulp.dest('./dist'));
 });
+
+gulp.task('compile-less', function () {
+    return gulp.src('./less/**/*.less')
+        .pipe(less())
+        // .pipe(less({
+        //     paths: [ path.join(__dirname, 'less', 'includes') ]
+        // }))
+        .pipe(gulp.dest('./dist'));
+});
+
+gulp.task('build', ['babelify-and-uglify', 'compile-less']);
