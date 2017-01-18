@@ -18,3 +18,8 @@ target
 *.iml
 **/*.iml
 .idea
+
+
+# nodejs 
+
+node_modules
