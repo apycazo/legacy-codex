@@ -2,13 +2,17 @@
 
 Sample usage of angular + EcmaScript6 + gulp.
 
-*TODO*: Improve page w/bootstrap to include each result in its own panel w/sources
+## Task list
+
+- [] Update code layout and include instructions on how to run as `dist` or `dev`.
+- [x] Change page layout and bootstrap theme.
+- [x] Improve page w/bootstrap to include each result in its own panel w/sources.
 
 ## Start
 
 Install resources with `npm install`, or add dependencies with `npm install --save-dev <package>`.
 
-Test w/node http-server `http-server .` (To install: `npm install -g http-server`).
+Test with nodejs http-server `http-server .` (To install: `npm install -g http-server`).
 
 ## Example Gulpfile
 
