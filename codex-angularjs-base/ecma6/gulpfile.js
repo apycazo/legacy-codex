@@ -7,7 +7,7 @@ var gulp     = require('gulp'),
   babelify   = require('babelify')
   sourcemaps = require('gulp-sourcemaps'),
   rename     = require("gulp-rename"),
-  less       = require('gulp-less');;
+  less       = require('gulp-less');
 
 gulp.task('babelify-and-uglify', function () {
 
