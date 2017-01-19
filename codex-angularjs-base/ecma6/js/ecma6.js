@@ -42,7 +42,8 @@ function CoreCtrl ($scope, $window, commonSrvc) {
     angular.extend($scope, {
         parameterDefaults: {
             src: inc.toString(),
-            val: inc(9)
+            val1: inc(9),
+            val2: inc(9,10)
         }
     });
 
