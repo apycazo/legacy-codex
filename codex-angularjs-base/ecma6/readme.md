@@ -4,7 +4,8 @@ Sample usage of angular + EcmaScript6 + gulp.
 
 ## Task list
 
-- [] Update code layout and include instructions on how to run as `dist` or `dev`.
+- [ ] Use https://www.npmjs.org/package/gulp-html-replace to switch dependencies on `dist` .
+- [ ] Update code layout and include instructions on how to run as `dist` or `dev`.
 - [x] Change page layout and bootstrap theme.
 - [x] Improve page w/bootstrap to include each result in its own panel w/sources.
 
