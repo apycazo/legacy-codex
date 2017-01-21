@@ -14,17 +14,21 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.json.JacksonTester;
 import org.springframework.boot.test.json.JsonContent;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
+import org.springframework.http.RequestEntity;
 import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.context.junit4.SpringRunner;
+import org.springframework.web.client.RestTemplate;
+import org.springframework.web.util.UriTemplate;
 
 import java.io.IOException;
+import java.net.URI;
 import java.util.Collections;
 
 import static io.restassured.RestAssured.given;
 import static io.restassured.RestAssured.when;
 import static org.hamcrest.CoreMatchers.*;
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.*;
 
 /**
  * This could have used @WebMvcTest(UserController.class), but this gives another option.
@@ -194,5 +198,24 @@ public class UserControllerTest
                 .doesNotHaveJsonPathValue("createdOn")
                 .doesNotHaveJsonPathValue("updatedOn")
                 .doesNotHaveJsonPathValue("internalId");
+    }
+
+    @Test
+    public void restTemplateClientRequest ()
+    {
+        // create a rest template
+        RestTemplate rest = new RestTemplate();
+        // resource to POST
+        UserInfo info = UserInfo.builder().id(0).username("Gandalf the grey").build();
+        // URI to send request. An example: http://127.0.0.1:40799/user
+        URI uri = new UriTemplate("http://127.0.0.1:{port}{path}").expand(port, UserServicePath);
+        // Actual POST request
+        UserInfo createdUser = rest
+                .exchange(RequestEntity.post(uri).contentType(MediaType.APPLICATION_JSON).body(info), UserInfo.class)
+                .getBody();
+        // Check that I got an user
+        assertNotNull("Created user is returned null", createdUser);
+        // And that it has a valid ID
+        assertNotEquals(0, createdUser.getId());
     }
 }
