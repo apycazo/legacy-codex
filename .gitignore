@@ -19,6 +19,8 @@ target
 **/*.iml
 .idea
 
+/log
+/logs
 
 # nodejs 
 
