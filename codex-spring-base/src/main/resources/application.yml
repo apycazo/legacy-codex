@@ -1,8 +1,2 @@
-# app configuration
-
-# cache config
-
-spring.cache:
-    type: caffeine
-    cache-names: timed-cache
-    caffeine.spec: expireAfterAccess=2s
+spring.application.name: codex-spring-base
+spring.profiles.active: cache-caffeine
