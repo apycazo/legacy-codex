@@ -1,2 +1,20 @@
 spring.application.name: codex-spring-base
 spring.profiles.active: cache-caffeine
+
+# Colors logger output. Options are ALWAYS | DETECT | NEVER
+spring.output.ansi.enabled: ALWAYS
+
+# Note: Check http://docs.spring.io/spring-boot/docs/current/reference/html/boot-features-logging.html#_profile_specific_configuration
+
+#logging:
+#    If set, will write logs to file. These logs will rotate at 10MB
+#    file: logs/codex-spring-base.log
+#    pattern:
+#        console: ${CONSOLE_LOG_PATTERN:-%clr(%d{yyyy-MM-dd HH:mm:ss.SSS}){faint} %clr(${LOG_LEVEL_PATTERN:-%5p}) %clr(${PID:- }){magenta} %clr(---){faint} %clr([%15.15t]){faint} %clr(%-40.40logger{39}){cyan} %clr(:){faint} %m%n${LOG_EXCEPTION_CONVERSION_WORD:-%wEx}}
+#        file: ${FILE_LOG_PATTERN:-%d{yyyy-MM-dd HH:mm:ss.SSS} ${LOG_LEVEL_PATTERN:-%5p} ${PID:- } --- [%t] %-40.40logger{39} : %m%n${LOG_EXCEPTION_CONVERSION_WORD:-%wEx}}
+#        level: %5p
+#    level:
+#        root: WARN
+#        org.springframework.web: DEBUG
+#        org.hibernate: ERROR
+
