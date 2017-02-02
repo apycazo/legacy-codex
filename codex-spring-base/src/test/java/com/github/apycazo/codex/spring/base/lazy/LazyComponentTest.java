@@ -10,7 +10,7 @@ import static org.junit.Assert.assertEquals;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest(classes = LazyConfig.class)
-public class LazyComponentConfigTest
+public class LazyComponentTest
 {
     @Autowired
     private LazyObserver lazyObserver;
