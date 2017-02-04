@@ -1,0 +1,25 @@
+# -------------------------------------------------------------
+# Spring configuration
+# -------------------------------------------------------------
+spring.application.name: codex-spring-rest
+# Colors logger output. Options are ALWAYS | DETECT | NEVER
+spring.output.ansi.enabled: ALWAYS
+
+# -------------------------------------------------------------
+# DB configuration
+# -------------------------------------------------------------
+
+# Autocreate DB on startup
+spring.jpa.hibernate.ddl-auto: create-drop
+spring.jpa.show-sql: false
+
+
+# Spring data config
+
+# Uncomment to use a file instead of embedded
+#spring.datasource.url: jdbc:h2:file:./h2db
+
+# Other properties
+
+#spring.datasource.username: dbuser
+#spring.datasource.password: dbpass
