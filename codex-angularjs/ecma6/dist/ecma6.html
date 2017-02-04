@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>ES6+Angular+Gulp</title>
+
+  <!-- Angular libraries -->
+  <script src="../node_modules/angular/angular.min.js"></script>
+  <script src="../node_modules/angular-route/angular-route.min.js"></script>
+  <!-- Bootstrap dependencies -->
+  <script src="../node_modules/jquery/dist/jquery.min.js"></script>
+  <!-- default bootstrap css -->
+  <!-- <link rel="stylesheet" href="/node_modules/bootstrap/dist/css/bootstrap.min.css" type="text/css"/> -->
+  <!-- cyborg theme from bootswatch -->
+  <link rel="stylesheet" href="../themes/cyborg.bootstrap.min.css" type="text/css"/>
+  <script src="../node_modules/bootstrap/dist/js/bootstrap.min.js"></script>
+  <script src="js/ecma6.js"></script>
+  <!-- <script src="dist/app.min.js"></script> -->
+
+</head>
+
+<body ng-app="test">
+  <div ng-controller="CoreCtrl">
+
+    <div class="jumbotron">
+        <div class="text-center">
+            <h1>ES6 + Angular + Gulp</h1>
+            <p >
+                <a class="btn btn-primary btn-lg" href="#" role="button" ng-click="goToGithub()">GitHub sources</a>
+            </p>
+        </div>
+    </div>
+
+    <div class="container-fluid">
+        <div class="row">
+
+            <div class="col-md-6">
+
+                <!-- Default params -->
+
+                <div class="panel panel-primary">
+                    <div class="panel-heading">
+                        <h3 class="panel-title">Function parameters with default values</h3>
+                    </div>
+                    <div class="panel-body">
+                        <p>Calling function with only one value</p>
+                        <pre>{{parameterDefaults.src}}</pre>
+                        <code>inc (9) = {{parameterDefaults.val1}}</code>
+                        <br>
+                        <code>inc (9,10) = {{parameterDefaults.val2}}</code>
+                    </div>
+                </div>
+
+                <!-- Unknown params -->
+
+                <div class="panel panel-primary">
+                    <div class="panel-heading">
+                        <h3 class="panel-title">Function with unknown parameter count</h3>
+                    </div>
+                    <div class="panel-body">
+                        <p>Calling function with different values</p>
+                        <pre>{{parametersUnknown.src}}</pre>
+                        <code>sum (1,2,3) = {{parametersUnknown.val1}}</code>
+                        <br>
+                        <code>sum () = {{parametersUnknown.val2}}</code>
+                    </div>
+                </div>
+
+            </div>
+
+            <div class="col-md-6">
+
+                <!-- Class init -->
+
+                <div class="panel panel-primary">
+                    <div class="panel-heading">
+                        <h3 class="panel-title">Class value initialization</h3>
+                    </div>
+                    <div class="panel-body">
+                        <p>Two different instances of 'Foo'</p>
+                        <pre>{{classInit.src}}</pre>
+                        <code>new Foo().init().get() = {{classInit.val1}}</code>
+                        <br>
+                        <code>new Foo().init(2).get() = {{classInit.val2}}</code>
+                    </div>
+                </div>
+
+                <!-- Class init -->
+
+                <div class="panel panel-primary">
+                    <div class="panel-heading">
+                        <h3 class="panel-title">Array initialization</h3>
+                    </div>
+                    <div class="panel-body">
+                        <p>Initializating an array with '...'</p>
+                        <pre>{{arrayInit.src}}</pre>
+                        <code>console.log(values) = {{arrayInit.val}}</code>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+  </div>
+</body>
+</html>
