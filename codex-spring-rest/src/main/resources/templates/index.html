@@ -1,8 +1,18 @@
 <!doctype html>
 <html lang="en">
-<body>
-    <h1>Demo using '{{controller}}'</h1>
-    <div>Epoch time is <strong>'{{epoch}}'</strong></div>
-    <p>Version : {{version.number}}</p>
+<head>
+    <script src="jquery.min.js"></script>
+    <script src="bootstrap.min.js"></script>
+    <link  href="bootstrap.min.css" rel="stylesheet" type="text/css"/>
+</head>
+<body style="margin:5px">
+
+    <div class="panel panel-default">
+        <div class="panel-heading">Demo using '{{controller}}'</div>
+        <div class="panel-body">
+            <p>Epoch time is <strong>'{{epoch}}'</strong></p>
+            <p>Version : {{version.number}}</p>
+        </div>
+    </div>
 </body>
 </html>
