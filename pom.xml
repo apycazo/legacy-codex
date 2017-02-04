@@ -10,9 +10,8 @@
   	<packaging>pom</packaging>
  
 	<modules>
-    	<module>codex-spring-data</module>
-    	<module>codex-spring-rest</module>
         <module>codex-spring-base</module>
+		<module>codex-spring-rest</module>
     </modules>
 
 </project>
