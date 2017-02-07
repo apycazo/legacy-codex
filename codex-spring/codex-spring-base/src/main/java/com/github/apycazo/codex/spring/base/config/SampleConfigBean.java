@@ -16,7 +16,7 @@ import java.util.Map;
 @Slf4j
 @ToString
 @Component
-@ConfigurationProperties(prefix = "config", locations = { "classpath:config-reference.yml", "classpath:config-reference.properties" })
+@ConfigurationProperties(prefix = "config")
 public class SampleConfigBean
 {
     private String string = "defaultStringValue";
