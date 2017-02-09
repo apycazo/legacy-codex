@@ -12,6 +12,7 @@
 	<modules>
         <module>codex-spring-base</module>
 		<module>codex-spring-rest</module>
+        <module>codex-spring-security</module>
     </modules>
 
 </project>
