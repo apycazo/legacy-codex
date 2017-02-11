@@ -1,7 +1,10 @@
 package com.github.apycazo.codex.spring.security.config;
 
+import lombok.Data;
+import lombok.EqualsAndHashCode;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.http.HttpMethod;
@@ -19,12 +22,17 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
+@Data
 @Slf4j
 @Configuration
 @EnableWebSecurity
+@EqualsAndHashCode(callSuper = false)
+@ConfigurationProperties(prefix = "security")
 public class SecurityConfig extends WebSecurityConfigurerAdapter
 {
-    static final String REALM = "codex-spring-security";
+    private String realm = "codex-spring-security";
+    private boolean stateless = true;
+    private boolean csrfDisabled = true;
 
     @Autowired
     public void configureGlobalSecurity(AuthenticationManagerBuilder auth) throws Exception
@@ -42,8 +50,17 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter
         http
                 .authorizeRequests()
                 .antMatchers("/private/**").hasRole("wizard")
-                .and().httpBasic().realmName(REALM).authenticationEntryPoint(basicAuthenticationEntryPoint())
-                .and().sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS);
+                .and().httpBasic().realmName(realm).authenticationEntryPoint(basicAuthenticationEntryPoint());
+
+        if (stateless) {
+            log.info("Sessions set to be stateless");
+            http.sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS);
+        }
+
+        if (csrfDisabled) {
+            log.info("CSRF forgery protection is disabled");
+            http.csrf().disable();
+        }
     }
 
     @Override
@@ -67,7 +84,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter
             @Override
             public void afterPropertiesSet() throws Exception
             {
-                setRealmName(SecurityConfig.REALM);
+                setRealmName(realm);
                 super.afterPropertiesSet();
             }
         };
