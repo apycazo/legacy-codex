@@ -49,6 +49,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter
         log.info("Configuring security");
         http
                 .authorizeRequests()
+                .antMatchers("/security/logout").permitAll()
                 .antMatchers("/private/**").hasRole("wizard")
                 .and().httpBasic().realmName(realm).authenticationEntryPoint(basicAuthenticationEntryPoint());
 
@@ -78,7 +79,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter
                                  final HttpServletResponse response,
                                  final AuthenticationException authException) throws IOException, ServletException
             {
-                response.sendError(HttpServletResponse.SC_UNAUTHORIZED, "Authentication error on realm:" + getRealmName());
+                response.sendError(HttpServletResponse.SC_UNAUTHORIZED, "Authentication error on " + getRealmName());
             }
 
             @Override
