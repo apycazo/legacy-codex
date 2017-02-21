@@ -9,7 +9,7 @@ spring.output.ansi.enabled: ALWAYS
 # DB configuration
 # -------------------------------------------------------------
 
-# Autocreate DB on startup
+# Auto create DB on startup
 spring.jpa.hibernate.ddl-auto: create-drop
 spring.jpa.show-sql: false
 
