@@ -39,7 +39,7 @@ public class StatefulSecurityTest
         Map<String,String> cookies = given()
                 // sends auth info without expecting a requirement for it
                 .auth().preemptive().basic("gandalf", "the-grey")
-                // not the query should go ok
+                // now the query should be ok
                 .when()
                 .get("private/service")
                 .then()
@@ -62,7 +62,7 @@ public class StatefulSecurityTest
         Map<String,String> cookies = given()
                 // sends auth info without expecting a requirement for it
                 .auth().preemptive().basic("gandalf", "the-grey")
-                // not the query should go ok
+                // now the query should be ok
                 .when()
                 .get("private/service")
                 .then()

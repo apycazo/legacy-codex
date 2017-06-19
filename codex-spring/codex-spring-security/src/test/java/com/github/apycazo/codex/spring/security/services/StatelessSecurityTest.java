@@ -18,7 +18,7 @@ import static io.restassured.RestAssured.when;
         webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT,
         properties = { "security.stateless=true" })
 @RunWith(SpringRunner.class)
-public class SecuredServiceTest
+public class StatelessSecurityTest
 {
     @LocalServerPort
     private Integer port;
